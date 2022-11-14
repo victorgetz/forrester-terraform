@@ -2,7 +2,7 @@ data "opentelekomcloud_identity_project_v3" "current" {}
 
 module "terraform_secrets_from_encrypted_s3_bucket" {
   source            = "registry.terraform.io/iits-consulting/project-factory/opentelekomcloud//modules/obs_secrets_reader"
-  version           = "4.2.2"
+  version           = "5.0.0"
   bucket_name       = replace(lower("${data.opentelekomcloud_identity_project_v3.current.name}-${var.context}-${var.stage}-stage-secrets"), "_", "-")
   bucket_object_key = "terraform-secrets"
   required_secrets = [
@@ -59,7 +59,7 @@ module "argocd" {
   argocd_project_name              = "infrastructure-charts"
   argocd_git_access_token_username = "argo"
   argocd_git_access_token          = var.git_token
-  argocd_project_source_repo_url   = "https://github.com/iits-consulting/otc-infrastructure-charts-template.git"
+  argocd_project_source_repo_url   = "https://github.com/victorgetz/otc-infrastructure-charts-template.git"
   argocd_project_source_path       = "stages/${var.stage}"
   argocd_application_values = {
     global = {
